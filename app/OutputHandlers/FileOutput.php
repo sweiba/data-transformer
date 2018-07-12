@@ -13,6 +13,9 @@ class FileOutput implements OutputInterface
 
     public function output(string $data)
     {
+    	$dir = dirname($this->path);
+    	if(!file_exists($dir))
+    		mkdir(dirname($this->path), 0777, true);
         file_put_contents($this->path, $data);
     }
 
