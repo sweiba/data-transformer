@@ -13,6 +13,7 @@ You can change this parameters in config/app.php
 ### Step 1
     git clone https://github.com/sweiba/data-transformer.git
 ### Step 2
+    cd data-transformer
     composer install
 ### Step 3
     set up config/app.php file
