@@ -4,7 +4,6 @@ namespace Test\OutputHandlers;
 
 class FileOutput implements OutputInterface
 {
-
     private $path;
 
     public function __construct(string $path)
@@ -14,11 +13,7 @@ class FileOutput implements OutputInterface
 
     public function output(string $data)
     {
-        file_put_contents($this->getPath(), $data);
+        file_put_contents($this->path, $data);
     }
 
-    private function getPath()
-    {
-        return $this->path;
-    }
 }

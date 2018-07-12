@@ -5,7 +5,7 @@ namespace Test;
 use Test\Converters\ConverterInterface;
 use Test\OutputHandlers\OutputInterface;
 use Test\OutputHandlers\WithAdditionalHeaders;
-use Test\Providers\CSVDataProvider;
+use Test\Providers\ProviderInterface;
 
 class DataTransformer
 {
@@ -14,7 +14,7 @@ class DataTransformer
     private $converter;
     private $data;
 
-    public function __construct(CSVDataProvider $provider, ConverterInterface $converter, OutputInterface $outputHandler)
+    public function __construct(ProviderInterface $provider, ConverterInterface $converter, OutputInterface $outputHandler)
     {
         $this->provider = $provider;
         $this->converter = $converter;
@@ -45,7 +45,7 @@ class DataTransformer
         $this->outputHandler->output($this->getData());
     }
 
-    public function setAdditionalHeaders()
+    protected function setAdditionalHeaders()
     {
         if(!$this->converter instanceof WithAdditionalHeaders)
             return false;

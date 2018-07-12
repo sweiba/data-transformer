@@ -7,8 +7,6 @@ use Test\DataProvider;
 
 class CSVDataProvider implements ProviderInterface
 {
-
-    const FILE_PATH = "src/books.csv";
     private $parser;
 
     public function __construct(Reader $parser)

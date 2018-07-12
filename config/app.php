@@ -5,15 +5,9 @@ return [
     "output" => "screen",
     "output_format" => "html",
 
+    "input_file_path" => "/public/src/books.csv",
+    "output_file_path" => "/public/dst/books.txt",
 
-
-
-
-
-
-    //optional
-    "input_file" => "/src/books122312.csv",
-    "output_file" => "/dst/fjdskfjls.txt",
     "json_root" => "books",
     "html_view" => "books",
 ];

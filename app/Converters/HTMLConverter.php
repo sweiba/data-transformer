@@ -12,7 +12,7 @@ class HTMLConverter implements ConverterInterface
     {
         $this->viewName = $viewName;
         if (!file_exists($this->getViewPath()))
-            throw new \Exception("View " . $viewName . "does not exists");
+            throw new \Exception("View " . $viewName . " does not exists");
     }
 
     public function convert($data): string

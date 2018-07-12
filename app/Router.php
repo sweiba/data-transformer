@@ -6,34 +6,40 @@ class Router
 {
     const CONTROLLERS_NAMESPACE = 'Test\\Controllers\\';
 
-    private $routes;
+    private $route;
 
-    public function __construct(array $routes)
+    public function __construct(Route $route)
     {
-        $this->routes = $routes;
+        $this->route = $route;
     }
 
     public function route()
     {
+        $class = $this->getClass();
+        $method = $this->getMethod($class);
 
-        $uri = $this->getUri();
-        $controller = $this->routes[$uri];
-        $exController = explode("@", $controller);
-        $controllerClass = static::CONTROLLERS_NAMESPACE . $exController[0];
-        $methodName = $exController[1];
-
-        if (!class_exists($controllerClass))
-            throw new \Exception("Controller " . $controllerClass . " does not exists");
-        $oController = new $controllerClass;
-
-        if (!method_exists($oController, $methodName))
-            throw new \Exception("Method " . $methodName . " does not exists in class" . $controllerClass);
-
-        return $oController->$methodName();
+        return (new $class)->$method();
     }
 
-    private function getUri()
+    private function getClass()
     {
-        return $_SERVER["REQUEST_URI"];
+        $class = static::CONTROLLERS_NAMESPACE . $this->route->getClass();
+
+        if (!class_exists($class))
+            throw new \Exception("Controller " . $class . " does not exists");
+
+        return $class;
     }
+
+    private function getMethod($class)
+    {
+        $oController = new $class;
+        $method = $this->route->getMethod();
+
+        if (!method_exists($oController, $method))
+            throw new \Exception("Method " . $method . " does not exists in class" . $class);
+
+        return $method;
+    }
+
 }
